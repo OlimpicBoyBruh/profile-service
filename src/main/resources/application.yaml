@@ -1,0 +1,25 @@
+server:
+  port: 8085
+
+springdoc:
+  swagger-ui:
+    path: "/swagger"
+    disable-swagger-default-url: true
+    use-root-path: true
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/account-db
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+          jdbc.time_zone: UTC
+  liquibase:
+    change-log: db/changelog/changelog-master.xml
