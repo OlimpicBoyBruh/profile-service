@@ -5,7 +5,7 @@
 
     <changeSet id="v1-1" author="Artem Meshcheryakov">
 
-        <createTable tableName="account">
+        <createTable tableName="profile">
             <column name="id" type="uuid">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -22,7 +22,7 @@
             <column name="residence_address" type="varchar(255)"/>
         </createTable>
         <rollback>
-            <dropTable tableName="account"/>
+            <dropTable tableName="profile"/>
         </rollback>
     </changeSet>
 </databaseChangeLog>

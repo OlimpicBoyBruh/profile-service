@@ -8,7 +8,7 @@ springdoc:
     use-root-path: true
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/account-db
+    url: jdbc:postgresql://localhost:5432/profile-db
     username: ${DB_USER}
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
@@ -16,10 +16,6 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     hibernate:
-      ddl-auto: create
-      properties:
-        hibernate:
-          dialect: org.hibernate.dialect.PostgreSQLDialect
-          jdbc.time_zone: UTC
+      ddl-auto: validate
   liquibase:
     change-log: db/changelog/changelog-master.xml

@@ -1,6 +1,8 @@
 package ru.neoflex.jd.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,8 +15,9 @@ import java.util.UUID;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Account {
+public class Profile {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private UUID bankId;
     private String lastName;
