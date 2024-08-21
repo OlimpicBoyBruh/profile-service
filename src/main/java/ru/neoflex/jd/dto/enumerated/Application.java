@@ -7,9 +7,19 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Application {
     MOBILE("mobile"),
-    EMAIL("email"),
+    MAIL("mail"),
     GOSUSLUGI("gosuslugi"),
     BANK("bank");
 
-    private final String applicationValue;
+    public static Application fromValue(String value) {
+        for (Application application : Application.values()) {
+            if (application.getApplicationValue().equalsIgnoreCase(value)) {
+                return application;
+            }
+        }
+        throw new IllegalArgumentException("Unknown value: " + value);
     }
+
+    private final String applicationValue;
+
+}

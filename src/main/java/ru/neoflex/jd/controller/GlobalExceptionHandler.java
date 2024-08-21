@@ -1,5 +1,6 @@
 package ru.neoflex.jd.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springdoc.api.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,19 +14,24 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<ErrorMessage> notFoundEntityHandler(NoSuchElementException exception) {
+    public ResponseEntity<ErrorMessage> noSuchElementHandler(NoSuchElementException exception) {
+        log.error("Exception noSuchElementHandler: " + exception.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(exception.getMessage()));
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorMessage> notFoundEntityHandler(IllegalArgumentException exception) {
+    public ResponseEntity<ErrorMessage> illegalArgumentHandler(IllegalArgumentException exception) {
+        log.error("Exception illegalArgumentHandler: " + exception.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(exception.getMessage()));
     }
+
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<ErrorMessage> notFoundEntityHandler(HttpMessageNotReadableException exception) {
+    public ResponseEntity<ErrorMessage> httpMessageNotReadableHandler(HttpMessageNotReadableException exception) {
+        log.error("Exception httpMessageNotReadableHandler: " + exception.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(exception.getMessage()));
     }
 
@@ -37,8 +43,17 @@ public class GlobalExceptionHandler {
         for (FieldError fieldError : fieldErrors) {
             errorMessage.append(fieldError.getDefaultMessage()).append(".");
         }
+        log.error("Exception handleValidationHandler: " + errorMessage);
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(new ErrorMessage(errorMessage.toString()));
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorMessage> UnexpectedException(Exception exception) {
+        return ResponseEntity
+                .status(520)
+                .body(new ErrorMessage(exception.getMessage()));
+    }
+
 }

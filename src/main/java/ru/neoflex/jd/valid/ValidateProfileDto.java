@@ -27,7 +27,7 @@ public class ValidateProfileDto {
                 log.info("Invoke gosuslugi validation");
                 yield VALIDATOR.validate(profileDto, Validate.GosUslugiGroup.class);
             }
-            case EMAIL -> {
+            case MAIL -> {
                 log.info("Invoke mail validation");
                 yield VALIDATOR.validate(profileDto, Validate.MailGroup.class);
             }
@@ -40,7 +40,7 @@ public class ValidateProfileDto {
         if (!violations.isEmpty()) {
             StringBuilder sb = new StringBuilder("Validation failed: ");
             for (ConstraintViolation<ProfileDto> violation : violations) {
-                sb.append(violation.getMessage()).append("; ");
+                sb.append(violation.getMessage()).append(". ");
             }
             throw new IllegalArgumentException(sb.toString());
         }

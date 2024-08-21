@@ -38,7 +38,7 @@ public class ProfileController {
             example = "mobile") String application, @RequestBody @Valid ProfileDto profileDto) {
 
         log.info("Invoke createProfile method. profileDto: {}, application: {}", profileDto, application);
-        profileRepositoryService.createProfile(profileDto, Application.valueOf(application));
+        profileRepositoryService.createProfile(profileDto, Application.fromValue(application));
         log.info("Method createProfile successfully finished.");
     }
 
