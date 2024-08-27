@@ -20,19 +20,19 @@ import java.util.NoSuchElementException;
 public class GlobalExceptionHandler {
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<ErrorMessage> noSuchElementHandler(NoSuchElementException exception) {
-        log.error("Exception noSuchElementHandler: " + exception.getMessage());
+        log.error("Exception noSuchElementHandler: {}", exception.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(exception.getMessage()));
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorMessage> illegalArgumentHandler(IllegalArgumentException exception) {
-        log.error("Exception illegalArgumentHandler: " + exception.getMessage());
+        log.error("Exception illegalArgumentHandler: {}", exception.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(exception.getMessage()));
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ErrorMessage> httpMessageNotReadableHandler(HttpMessageNotReadableException exception) {
-        log.error("Exception httpMessageNotReadableHandler: " + exception.getMessage());
+        log.error("Exception httpMessageNotReadableHandler: {}", exception.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(exception.getMessage()));
     }
 
@@ -44,7 +44,7 @@ public class GlobalExceptionHandler {
         for (FieldError fieldError : fieldErrors) {
             errorMessage.append(fieldError.getDefaultMessage()).append(".");
         }
-        log.error("Exception handleValidationHandler: " + errorMessage);
+        log.error("Exception handleValidationHandler: {}", errorMessage);
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(new ErrorMessage(errorMessage.toString()));
@@ -52,7 +52,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MissingRequestHeaderException.class)
     public ResponseEntity<ErrorMessage> missingRequestHeaderHandler(MissingRequestHeaderException exception) {
-        log.error("Exception missingRequestHeaderHandler: " + exception.getMessage());
+        log.error("Exception missingRequestHeaderHandler: {}", exception.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(exception.getMessage()));
     }
 

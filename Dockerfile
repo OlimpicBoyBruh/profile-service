@@ -4,7 +4,7 @@ COPY . /app
 
 WORKDIR /app
 
-RUN mvn clean -DskipTests package
+RUN mvn clean package
 
 FROM openjdk:17
 

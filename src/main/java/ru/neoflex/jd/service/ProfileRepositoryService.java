@@ -28,7 +28,7 @@ public class ProfileRepositoryService {
         ValidateProfileDto.validate(profileDto, application);
         log.info("Invoke ProfileRepositoryService, method createProfile, profileDto {}, application: {}",
                 profileDto, application);
-        Profile profile  = profileRepository.save(profileMapper.toEntity(profileDto));
+        Profile profile = profileRepository.save(profileMapper.toEntity(profileDto));
         log.info("Profile successfully created.");
         return profile;
     }
@@ -42,7 +42,7 @@ public class ProfileRepositoryService {
 
     public List<ProfileDto> searchProfile(ProfileDto profileDto) {
         log.info("Invoke ProfileRepositoryService, method searchProfile, profileDto: {}", profileDto);
-        List<ProfileDto> profiles =profileRepository.findAll(Example.of(profileMapper.toEntity(profileDto),
+        List<ProfileDto> profiles = profileRepository.findAll(Example.of(profileMapper.toEntity(profileDto),
                 ExampleMatcher.matching().withIgnoreNullValues())).stream().map(profileMapper::toDto).toList();
         log.info("Profiles successfully found profiles: {}", profiles);
         return profiles;
