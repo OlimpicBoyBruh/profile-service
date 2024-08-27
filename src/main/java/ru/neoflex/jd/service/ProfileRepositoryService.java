@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import ru.neoflex.jd.dto.ProfileDto;
 import ru.neoflex.jd.dto.enumerated.Application;
+import ru.neoflex.jd.entity.Profile;
 import ru.neoflex.jd.mapping.ProfileMapper;
 import ru.neoflex.jd.repository.ProfileRepository;
 import ru.neoflex.jd.valid.ValidateProfileDto;
@@ -23,12 +24,13 @@ public class ProfileRepositoryService {
     private final ProfileRepository profileRepository;
     private final ProfileMapper profileMapper;
 
-    public void createProfile(ProfileDto profileDto, Application application) {
+    public Profile createProfile(ProfileDto profileDto, Application application) {
         ValidateProfileDto.validate(profileDto, application);
         log.info("Invoke ProfileRepositoryService, method createProfile, profileDto {}, application: {}",
                 profileDto, application);
-        profileRepository.save(profileMapper.toEntity(profileDto));
+        Profile profile  = profileRepository.save(profileMapper.toEntity(profileDto));
         log.info("Profile successfully created.");
+        return profile;
     }
 
     public ProfileDto getProfileById(UUID id) {
@@ -40,8 +42,10 @@ public class ProfileRepositoryService {
 
     public List<ProfileDto> searchProfile(ProfileDto profileDto) {
         log.info("Invoke ProfileRepositoryService, method searchProfile, profileDto: {}", profileDto);
-        return profileRepository.findAll(Example.of(profileMapper.toEntity(profileDto),
+        List<ProfileDto> profiles =profileRepository.findAll(Example.of(profileMapper.toEntity(profileDto),
                 ExampleMatcher.matching().withIgnoreNullValues())).stream().map(profileMapper::toDto).toList();
+        log.info("Profiles successfully found profiles: {}", profiles);
+        return profiles;
     }
 
 

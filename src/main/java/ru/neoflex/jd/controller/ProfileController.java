@@ -61,7 +61,7 @@ public class ProfileController {
     public List<ProfileDto> searchProfile(@ModelAttribute ProfileDto profileDto) {
         log.info("Invoke searchProfile method. profileDto: {}", profileDto);
         List<ProfileDto> profileDtoList = profileRepositoryService.searchProfile(profileDto);
-        log.info("Method searchProfile return find profileDto: {}", profileDto);
+        log.info("Method searchProfile return find profileDtoList: {}", profileDtoList);
         return profileDtoList;
     }
 }
