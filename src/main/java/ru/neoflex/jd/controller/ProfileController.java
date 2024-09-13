@@ -3,7 +3,6 @@ package ru.neoflex.jd.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.neoflex.jd.dto.ProfileDto;
-import ru.neoflex.jd.dto.enumerated.Application;
 import ru.neoflex.jd.service.ProfileRepositoryService;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -35,7 +32,7 @@ public class ProfileController {
     )
     @PostMapping("/create")
     public void createProfile(@RequestHeader("x-Source") @Parameter(description = "Источник",
-            example = "mobile") String application, @RequestBody @Valid ProfileDto profileDto) {
+            example = "mobile") String application, @RequestBody ProfileDto profileDto) {
 
         log.info("Invoke createProfile method. profileDto: {}, application: {}", profileDto, application);
         profileRepositoryService.createProfile(profileDto, application);

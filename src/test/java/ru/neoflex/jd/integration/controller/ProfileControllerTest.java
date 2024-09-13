@@ -20,13 +20,10 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 import ru.neoflex.jd.dto.ProfileDto;
-import ru.neoflex.jd.dto.enumerated.Application;
 import ru.neoflex.jd.service.ProfileRepositoryService;
-
 import java.time.LocalDate;
 import java.util.NoSuchElementException;
 import java.util.UUID;
-
 import static junit.framework.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

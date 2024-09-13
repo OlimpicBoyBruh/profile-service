@@ -6,14 +6,12 @@ import org.mapstruct.factory.Mappers;
 import ru.neoflex.jd.dto.ProfileDto;
 import ru.neoflex.jd.entity.Profile;
 import ru.neoflex.jd.mapping.ProfileMapper;
-
 import java.time.LocalDate;
 import java.util.UUID;
-
 import static junit.framework.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
- class ProfileMapperTest {
+class ProfileMapperTest {
 
     private final ProfileMapper profileMapper = Mappers.getMapper(ProfileMapper.class);
 
