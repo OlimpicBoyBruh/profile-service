@@ -6,6 +6,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+import ru.neoflex.jd.configuration.AppValidRulesProperties;
 import ru.neoflex.jd.dto.ProfileDto;
 import ru.neoflex.jd.dto.enumerated.Application;
 import ru.neoflex.jd.entity.Profile;
@@ -23,9 +24,10 @@ import java.util.UUID;
 public class ProfileRepositoryService {
     private final ProfileRepository profileRepository;
     private final ProfileMapper profileMapper;
+    private final ValidateProfileDto validateProfileDto;
 
-    public Profile createProfile(ProfileDto profileDto, Application application) {
-        ValidateProfileDto.validate(profileDto, application);
+    public Profile createProfile(ProfileDto profileDto, String application) {
+        validateProfileDto.validate(profileDto, application);
         log.info("Invoke ProfileRepositoryService, method createProfile, profileDto {}, application: {}",
                 profileDto, application);
         Profile profile = profileRepository.save(profileMapper.toEntity(profileDto));

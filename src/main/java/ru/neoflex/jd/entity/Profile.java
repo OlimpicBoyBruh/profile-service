@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @Entity
 @Builder
 @AllArgsConstructor
+@Audited
 @NoArgsConstructor
 public class Profile {
     @Id

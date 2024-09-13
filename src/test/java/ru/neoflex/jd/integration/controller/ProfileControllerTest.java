@@ -87,7 +87,7 @@ public class ProfileControllerTest {
 
     @Test
     void getProfileSuccessTest() throws Exception {
-        String uuid = String.valueOf(profileRepositoryService.createProfile(getProfileDto(), Application.MOBILE).getId());
+        String uuid = String.valueOf(profileRepositoryService.createProfile(getProfileDto(), "mobile").getId());
 
         mockMvc.perform(get("/profile/get/" + uuid)
                         .contentType(MediaType.APPLICATION_JSON))
@@ -96,7 +96,7 @@ public class ProfileControllerTest {
 
     @Test
     void searchProfileSuccessTest() throws Exception {
-        profileRepositoryService.createProfile(getProfileDto(), Application.MOBILE);
+        profileRepositoryService.createProfile(getProfileDto(), "mobile");
 
         mockMvc.perform(get("/profile/search?phoneNumber=7123456789")
                         .contentType(MediaType.APPLICATION_JSON))

@@ -8,7 +8,7 @@ springdoc:
     use-root-path: true
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/profile-db
+    url: jdbc:postgresql://localhost:5432/tarifficator-db
     username: ${DB_USER}
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
@@ -16,6 +16,33 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create-drop
   liquibase:
     change-log: db/changelog/changelog-master.xml
+
+#Дополнительные правила для проверки необходимо описать ниже
+x-source:
+  rules-validate:
+    mail:
+      - firstName
+      - email
+    mobile:
+      - phoneNumber
+    bank:
+      - bankId
+      - firstName
+      - lastName
+      - middleName
+      - birthDate
+      - passportNumber
+    gosuslugi:
+      - id
+      - bankId
+      - lastName
+      - firstName
+      - middleName
+      - dateOfBirth
+      - passportNumber
+      - birthPlace
+      - phoneNumber
+      - registrationAddress
